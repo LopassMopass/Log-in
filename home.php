@@ -1,17 +1,11 @@
 <?php
 session_start();
-
-if(!isset($_SESSION["user"])) 
+if(isset($_GET["logout"])) 
 {
+    session_unset();
+    session_destroy();
     header("Location: index.php");
     exit();
-}
-
-if(isset($_GET["logout"])) {
-  session_unset();
-  session_destroy();
-  header("Location: index.php");
-  exit();
 }
 ?>
 <!doctype html>
@@ -28,15 +22,15 @@ if(isset($_GET["logout"])) {
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li class="nav-item"><a href="./index.php" class="nav-link px-2 text-white">Home</a></li>
-            <li class="nav-item"><a href="./login.php" class="nav-link px-2 text-secondary">Data</a></li>
+            <li class="nav-item"><a href="./login.php" class="nav-link px-2 text-secondary" disabled>Data</a></li>
           </ul>
         </div>
       </div> 
     </header>
-    <div>
-        <p>Welcome, <?php echo $email; ?></p>
+    <div class="text-end p-3">
         <a href="?logout=true" class="btn btn-danger">Logout</a>
     </div>
+    <p class="text-center"><b>Welcome, <?= $_SESSION["email"]?></b></p>
     <div>
       <p class="text-center">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla non arcu lacinia neque faucibus fringilla. 
@@ -63,7 +57,7 @@ if(isset($_GET["logout"])) {
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item"><a href="./index.php" class="nav-link px-2 text-body-secondary">Home</a></li>
-          <li class="nav-item"><a href="./login.php" class="nav-link px-2 text-body-secondary">Data</a></li>
+          <li class="nav-item"><a href="./login.php" class="nav-link px-2 text-body-secondary" disabled>Data</a></li>
         </ul>
         <p class="text-center text-body-secondary">@Hallo!</p>
       </footer>
